@@ -13,6 +13,7 @@ import UserIcon from '@mui/icons-material/Group';
 import { Button } from '@mui/material';
 import { MyAppBar } from './MyAppBar';
 import { lightTheme, darkTheme } from './theme';
+import  loginpage  from "./Login";
 
 export const App = () => {
     const [theme, setTheme] = useState(lightTheme);
@@ -23,6 +24,7 @@ export const App = () => {
 
     return (
         <Admin
+            loginPage={loginpage}
             authProvider={authProvider}
             dataProvider={dataProvider}
             dashboard={Dashboard}
