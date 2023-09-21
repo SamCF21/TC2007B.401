@@ -3,6 +3,7 @@
 **/.package-lock.json
 **/.vite/
 **/_metadata.json
+**/node_modules/
 
 # Ignore specific files within .vite/deps/
 **/.vite/deps/chunk-*.js
