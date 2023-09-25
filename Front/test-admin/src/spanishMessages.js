@@ -20,7 +20,7 @@ const spanishMessages = {
             remove_filter: 'Quitar este filtro',
             remove_all_filters: 'Quitar todos los filtros',
             remove: 'Quitar',
-            save: 'Guardad',
+            save: 'Guardar',
             search: 'Buscar',
             select_all: 'Seleccionar todo',
             select_row: 'Seleccionar esta fila',

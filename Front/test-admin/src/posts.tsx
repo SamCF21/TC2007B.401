@@ -1,4 +1,4 @@
-import { List, Datagrid, TextField, ReferenceField, EditButton, Edit, SimpleForm, ReferenceInput, TextInput, Create } from "react-admin";
+import { List, Datagrid, TextField, ReferenceField, EditButton, Edit, SimpleForm, ReferenceInput, TextInput, Create, SelectInput} from "react-admin";
 import { useRecordContext} from "react-admin";
 
 const postFilters = [
@@ -24,6 +24,11 @@ export const PostEdit = () => (
             <TextInput source="id" />
             <TextInput source="title" />
             <TextInput source="body" />
+            <SelectInput source="prioridad" label="Prioridad" choices={[
+                { id: 'baja', name: 'Baja' },
+                { id: 'media', name: 'Media' },
+                { id: 'alta', name: 'Alta' },
+            ]} />
         </SimpleForm>
     </Edit>
 );
@@ -34,6 +39,11 @@ export const PostCreate = () => (
           <ReferenceInput source="userId" reference="users" />
           <TextInput source="title" />
           <TextInput source="body" multiline rows={5} />
+          <SelectInput source="prioridad" label="Prioridad" choices={[
+                { id: 'baja', name: 'Baja' },
+                { id: 'media', name: 'Media' },
+                { id: 'alta', name: 'Alta' },
+            ]} />
         </SimpleForm>
       </Create>
     );

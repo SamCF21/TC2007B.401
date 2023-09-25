@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useLogin, useNotify } from 'react-admin';
-import { Button } from '@mui/material';
+import { Button, TextField, Grid, Typography, Paper} from '@mui/material';
 import { useInput } from 'react-admin';
 
 const loginpage = () => {
@@ -18,23 +18,48 @@ const loginpage = () => {
     };
 
     return (
-        <form>
-            <h1>Login Page!</h1>
-            <input
-                name="email"
-                type="email"
-                value={email}
-                onChange={e => setEmail(e.target.value)}
-            />
-            <input
-                name="password"
-                type="password"
-                value={password}
-                onChange={e => setPassword(e.target.value)}
-            />
-            <Button onClick={handleSubmit} type="submit"> Login </Button>
-        </form>
-    );
+        <Grid
+        container
+        justifyContent = "center"
+        alignItems = "center"
+        style = {{ height: "100vh"}}
+        component = "div">
+
+            <Grid item xs = {12} sm = {6} md = {4} lg = {3} xl = {2}>
+                <Paper elevation = {4} style = {{ padding: 20}}>
+                    <Typography variant = "h4" align = "center" gutterBottom>
+                        Login Page
+                    </Typography>
+                
+                    <TextField
+                        fullWidth
+                        label = "Email"
+                        variant = "outlined"
+                        margin = "normal"
+                        value = {email}
+                        onChange = {(e) => setEmail(e.target.value)}
+                    />
+                    <TextField
+                        fullWidth
+                        label = "Password"
+                        variant = "outlined"
+                        margin = "normal"
+                        value = {password}
+                        onChange = {(e) => setPassword(e.target.value)}
+                        type = "password"
+                    />
+                    <Button
+                        fullWidth
+                        variant = "contained"
+                        color = "primary"
+                        style={{ marginTop: 16 }}
+                        onClick = {handleSubmit}>
+                        Login
+                    </Button>
+                </Paper>
+             </Grid>   
+        </Grid> 
+    );  
 };
 
 export default loginpage;
