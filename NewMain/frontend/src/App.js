@@ -5,10 +5,15 @@ import { TicketList, TicketEdit, TicketCreate } from "./TicketList";
 import { dataProvider } from "./dataProvider";
 import Registrarse from "./registrarse";
 import authProvider from "./authProvider";
+import { i18nProvider } from "./i18nProvider";
 
 const App = () => {
   return (
-    <Admin dataProvider={dataProvider} authProvider={authProvider}>
+    <Admin
+      dataProvider={dataProvider}
+      authProvider={authProvider}
+      i18nProvider={i18nProvider}
+    >
       <Resource
         name="tickets"
         list={TicketList}
