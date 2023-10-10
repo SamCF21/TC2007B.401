@@ -1,6 +1,8 @@
 import * as React from "react";
 import { useState } from "react";
 import { useLogin, useNotify } from "react-admin";
+import fundacionLogo from "./Assets/fundacionLogo.png";
+import backgroundMexico from "./Assets/backgroundMexico.png";
 
 const MyLoginPage = ({ theme }) => {
   const [username, setUsername] = useState("");
@@ -28,7 +30,7 @@ const MyLoginPage = ({ theme }) => {
       width: "auto",
       height: "auto",
       backgroundImage:
-        "url(http://ginva.com/wp-content/uploads/2012/07/city-skyline-wallpapers-008.jpg)",
+        "url(https://www.ciudadania-express.com/archivos/articulos/2019/12/7731_20191211111508.png)",
       backgroundSize: "cover",
       WebkitFilter: "blur(5px)",
       zIndex: 0,
@@ -129,16 +131,21 @@ const MyLoginPage = ({ theme }) => {
         <div style={styles.body}></div>
         <div style={styles.grad}></div>
         <div style={styles.header}>
-          <div style={styles.headerDiv}>
-            Site<span style={styles.headerSpan}>Random</span>
-          </div>
+          <img
+            src={fundacionLogo}
+            alt="Fundacion por Mexico"
+            style={{
+              width: "200px",
+              margin: "-35px auto 0 auto",
+            }}
+          />
         </div>
         <br />
         <div style={styles.login}>
           <form onSubmit={handleSubmit}>
             <input
               type="text"
-              placeholder="username"
+              placeholder="nombre de usuario"
               name="user"
               value={username}
               onChange={(e) => setUsername(e.target.value)}
@@ -147,7 +154,7 @@ const MyLoginPage = ({ theme }) => {
             <br />
             <input
               type="password"
-              placeholder="password"
+              placeholder="contraseña"
               name="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
@@ -164,6 +171,7 @@ const MyLoginPage = ({ theme }) => {
 
 export default MyLoginPage;
 
+// "url(http://ginva.com/wp-content/uploads/2012/07/city-skyline-wallpapers-008.jpg)"
 // import * as React from "react";
 // import { useState } from "react";
 // import { useLogin, useNotify } from "react-admin";
