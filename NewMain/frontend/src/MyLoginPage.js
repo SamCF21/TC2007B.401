@@ -78,7 +78,7 @@ const MyLoginPage = ({ theme }) => {
       height: "30px",
       background: "transparent",
       border: "none",
-      border: "1px solid rgba(255, 255, 255, 0.6)",
+      border: "2px solid rgba(255, 255, 255, 0.6)",
       color: "#fff",
       fontFamily: "Exo, sans-serif",
       fontSize: "16px",
@@ -149,7 +149,10 @@ const MyLoginPage = ({ theme }) => {
               name="user"
               value={username}
               onChange={(e) => setUsername(e.target.value)}
-              style={styles.inputField}
+              style={{
+                ...styles.inputField,
+                color: "white",
+              }}
             />
             <br />
             <input
@@ -158,7 +161,10 @@ const MyLoginPage = ({ theme }) => {
               name="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              style={styles.inputField}
+              style={{
+                ...styles.inputField,
+                color: "white",
+              }}
             />
             <br />
             <input type="submit" value="Login" style={styles.loginButton} />
