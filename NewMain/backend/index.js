@@ -4,6 +4,8 @@ var cors = require("cors");
 bodyParser = require("body-parser");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
+const https = require("https");
+const fs = require("fs");
 
 let db;
 const app = express();
@@ -214,7 +216,32 @@ app.delete("/tickets/:id", async (request, response) => {
   }
 });
 
-app.listen(1338, () => {
-  connectDB();
-  console.log("Servidor escuchando en puerto 1338");
-});
+// app.listen(1338, () => {
+//   connectDB();
+//   console.log("Servidor escuchando en puerto 1338");
+// });
+
+https
+  .createServer(
+    {
+      cert: fs.readFileSync("backend.cert"),
+      key: fs.readFileSync("backend.key"),
+    },
+    app
+  )
+  .listen(1338, () => {
+    connectDB();
+    console.log("Servidor escuchando en puerto 1338");
+  });
+// const httpsOptions = {
+//   key: fs.readFileSync("../CA/ca-private-key.pem"),
+//   cert: fs.readFileSync("../CA/ca-certificate.pem"),
+// };
+
+// const httpsServer = https.createServer(httpsOptions, app);
+// const PORT = 1338;
+
+// httpsServer.listen(PORT, () => {
+//   connectDB();
+//   console.log("Servidor escuchando en puerto " + PORT);
+// });
