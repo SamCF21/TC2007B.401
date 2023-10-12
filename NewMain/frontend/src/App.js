@@ -1,6 +1,8 @@
 import React from "react";
 import { Route } from "react-router-dom";
-import { Admin, Resource, CustomRoutes } from "react-admin";
+import darkTheme from "./theme";
+import { Admin, Resource, CustomRoutes, Layout } from "react-admin";
+import { MyAppBar } from "./MyAppBar";
 import { TicketList, TicketEdit, TicketCreate } from "./TicketList";
 import { dataProvider } from "./dataProvider";
 import Registrarse from "./registrarse";
@@ -8,11 +10,16 @@ import authProvider from "./authProvider";
 import MyLoginPage from "./MyLoginPage";
 import { i18nProvider } from "./i18nProvider";
 
+const MyLayout = (props) => <Layout {...props} appBar={MyAppBar} />;
+
 const App = () => {
   return (
     <Admin
       loginPage={MyLoginPage}
+      theme={darkTheme}
       dataProvider={dataProvider}
+      layout={MyLayout}
+      darkTheme={{ palette: { mode: "dark" } }}
       authProvider={authProvider}
       i18nProvider={i18nProvider}
     >
