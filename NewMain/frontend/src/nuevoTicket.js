@@ -3,9 +3,14 @@ import React, { useState } from "react";
 const NuevoTicket = () => {
   const [datos, setDatos] = useState({
     coordinador: "",
+    aula: "",
+    fecha: "",  
     categoria: "",
     subcategoria: "",
-    status: "",
+    estatus: "",
+    prioridad: "",
+    numIntermediarios: "",
+    numOficio: "",
     descripcion: "",
     comentario: "",
   });
@@ -19,7 +24,6 @@ const NuevoTicket = () => {
 
   const handleSendData = async () => {
     console.log(JSON.stringify(datos));
-    // Convert the form data to JSON
     const request = await new Request("http://127.0.0.1:1338/tickets", {
       method: "POST",
       body: JSON.stringify(datos),
@@ -36,9 +40,14 @@ const NuevoTicket = () => {
   };
   const {
     coordinador,
+    aula,
+    fecha,
     categoria,
     subcategoria,
-    status,
+    estatus,
+    prioridad,
+    numIntermediarios,
+    numOficio,  
     descripcion,
     comentario,
   } = datos;
@@ -53,6 +62,26 @@ const NuevoTicket = () => {
             id="coordinador"
             name="coordinador"
             value={coordinador}
+            onChange={handleChange}
+          />
+        </div>
+        <div>
+          <label htmlFor="aula">Aula:</label>
+          <input
+            type="text"
+            id="aula"
+            name="aula"
+            value={aula}
+            onChange={handleChange}
+            />
+        </div>
+        <div>
+          <label htmlFor="fecha">Fecha:</label>
+          <input
+            type="text"
+            id="fecha"
+            name="fecha"
+            value={fecha}
             onChange={handleChange}
           />
         </div>
@@ -77,12 +106,42 @@ const NuevoTicket = () => {
           />
         </div>
         <div>
-          <label htmlFor="status">Status:</label>
+          <label htmlFor="estatus">Estatus:</label>
           <input
             type="text"
-            id="status"
-            name="status"
-            value={status}
+            id="estatus"
+            name="estatus"
+            value={estatus}
+            onChange={handleChange}
+          />
+        </div>
+        <div>
+          <label htmlFor="prioridad">Prioridad:</label>
+          <input
+            type="text"
+            id="prioridad"
+            name="prioridad"
+            value={prioridad}
+            onChange={handleChange}
+          />
+        </div>
+        <div>
+          <label htmlFor="numIntermediarios">Numero de Intermediarios:</label>
+          <input
+            type="text"
+            id="numIntermediarios"
+            name="numIntermediarios"
+            value={numIntermediarios}
+            onChange={handleChange}
+          />
+        </div>
+        <div>
+          <label htmlFor="numOficio">Numero de Oficio:</label>
+          <input
+            type="text"
+            id="numOficio"
+            name="numOficio"
+            value={numOficio}
             onChange={handleChange}
           />
         </div>
