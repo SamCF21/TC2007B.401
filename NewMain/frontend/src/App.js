@@ -9,8 +9,12 @@ import Registrarse from "./registrarse";
 import authProvider from "./authProvider";
 import MyLoginPage from "./MyLoginPage";
 import { i18nProvider } from "./i18nProvider";
+import  Reportes  from "./reportes";
 
 const MyLayout = (props) => <Layout {...props} appBar={MyAppBar} />;
+
+const PostIcon = require("@mui/icons-material/Book").default;
+
 
 const App = () => {
   return (
@@ -29,6 +33,15 @@ const App = () => {
         edit={TicketEdit}
         create={TicketCreate}
       />
+
+        <Resource
+            name="reportes"
+            options = {{ label: 'Reportes'}}
+            list={Reportes}
+            icon={PostIcon}
+          />
+  
+      
       <CustomRoutes>
         <Route path="/registrarse" element={<Registrarse />} />
       </CustomRoutes>
