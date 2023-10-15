@@ -1,0 +1,19 @@
+
+.grid-container {
+    display: grid;
+    grid-template-rows: repeat(4, 1fr); 
+    gap: 16px; 
+  }
+  
+
+  .grid-item {
+    border: 1px solid #000000; 
+    padding: 16px; 
+    text-align: center; 
+  }
+  
+
+  .grid-item .MuiCard-root {
+    height: 100%;
+  }
+  
