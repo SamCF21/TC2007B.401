@@ -26,6 +26,7 @@ const authProvider = {
   logout: () => {
     localStorage.removeItem("auth");
     localStorage.removeItem("identity");
+    localStorage.removeItem("permissions");
     return Promise.resolve();
   },
   checkAuth: () => {
@@ -36,6 +37,7 @@ const authProvider = {
     if (status === 401 || status === 403) {
       localStorage.removeItem("auth");
       localStorage.removeItem("identity");
+      localStorage.removeItem("permissions");
       return Promise.reject();
     }
     return Promise.resolve();
@@ -47,8 +49,26 @@ const authProvider = {
       return Promise.reject();
     }
   },
-  getPermissions: () => {
-    return Promise.resolve();
+  getPermissions: async () => {
+    const token = localStorage.getItem("auth");
+    if (!token) {
+      return Promise.reject("Error linea 53");
+    }
+
+    const response = await fetch("http://localhost:1338/user/permissions", {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+
+    if (response.status < 200 || response.status >= 300) {
+      return Promise.reject("Error linea 64");
+    }
+
+    const permissions = await response.json();
+    console.log(permissions);
+    return Promise.resolve(permissions);
   },
 };
 
