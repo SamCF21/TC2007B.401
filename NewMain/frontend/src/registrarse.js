@@ -100,7 +100,7 @@ const Registrarse = () => {
             >
               <option value="coordinador de aula">Coordinador de Aula</option>
               <option value="coordinador nacional">Coordinador Nacional</option>
-              <option value="coordinador regional">Coordinador Regional</option>
+              <option value="coordinador ejecutivo">Coordinador Ejecutivo</option>
             </select>
           </div>
           <div className="form-group">

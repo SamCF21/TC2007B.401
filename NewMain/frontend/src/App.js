@@ -15,17 +15,25 @@ import Reportes from "./reportes";
 const MyLayout = (props) => <Layout {...props} appBar={MyAppBar} />;
 
 const PostIcon = require("@mui/icons-material/Book").default;
+const PostIcon2 = require("@mui/icons-material/LibraryBooks").default;
+
 
 const App = () => {
   const [showRegistrarse, setShowRegistrarse] = useState(false);
+  const [showReportes, setShowReportes] = useState(false)
 
   useEffect(() => {
     authProvider.getPermissions().then((permissions) => {
       console.log(permissions);
-      if (permissions.includes("coordinador nacional")) {
+      if (permissions.includes("coordinador ejecutivo")) {
         setShowRegistrarse(true);
       } else {
         setShowRegistrarse(false);
+      }
+      if (permissions.includes("coordinador ejecutivo") || permissions.includes("coordinador nacional")) {
+        setShowReportes(true);
+      } else {
+        setShowReportes(false);
       }
     });
   }, []);
@@ -42,13 +50,20 @@ const App = () => {
         i18nProvider={i18nProvider}
       >
         <Resource name="tickets" list={TicketList} edit={TicketEdit} create={TicketCreate} />
-        <Resource name="reportes" options={{ label: "Reportes" }} list={Reportes} icon={PostIcon} />
+        {showReportes && (
+          <Resource
+            name="reportes"
+            options={{ label: "Reportes" }}
+            list={Reportes}
+            icon={PostIcon}
+          />
+        )}
         {showRegistrarse && (
           <Resource
             name="registrarse"
             options={{ label: "Registrarse" }}
             list={Registrarse}
-            icon={PostIcon}
+            icon={PostIcon2}
           />
         )}
 
