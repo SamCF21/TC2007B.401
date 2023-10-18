@@ -133,7 +133,7 @@ const MyLoginPage = ({ theme }) => {
         <div style={styles.header}>
           <img
             src={fundacionLogo}
-            alt="Fundacion por Mexico"
+            alt="Logo Fundación por Mexico"
             style={{
               width: "200px",
               margin: "-35px auto 0 auto",
@@ -167,7 +167,7 @@ const MyLoginPage = ({ theme }) => {
               }}
             />
             <br />
-            <input type="submit" value="Login" style={styles.loginButton} />
+            <input type="submit" value="Iniciar sesión" style={styles.loginButton} />
           </form>
         </div>
       </body>
