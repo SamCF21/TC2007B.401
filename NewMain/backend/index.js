@@ -6,6 +6,14 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const https = require("https");
 const fs = require("fs");
+const dotenv = require("dotenv");
+
+dotenv.config();
+const secretKey = process.env.SECRET_KEY; // Obtenemos la secret key de nuestro .env file
+
+if (!secretKey) {
+  console.error('Secret key not found in .env file.');
+  process.exit(1)} // Aqui podemos obtener un error y abortar el programa si no se encuentra la llave, sirve como debugging
 
 let db;
 const app = express();
@@ -32,7 +40,7 @@ async function log(sujeto, accion, objeto) {
 app.get("/tickets", async (request, response) => {
   try {
     let token = request.get("Authentication");
-    let verifiedToken = await jwt.verify(token, "secretKey");
+    let verifiedToken = await jwt.verify(token, secretKey);
     let authData = await db
       .collection("usuarios")
       .findOne({ usuario: verifiedToken.usuario });
@@ -146,7 +154,7 @@ app.get("/tickets", async (request, response) => {
 app.get("/tickets/:id", async (request, response) => {
   try {
     let token = request.get("Authentication");
-    let verifiedToken = await jwt.verify(token, "secretKey");
+    let verifiedToken = await jwt.verify(token, secretKey);
     let authData = await db
       .collection("usuarios")
       .findOne({ usuario: verifiedToken.usuario });
@@ -170,7 +178,7 @@ app.get("/tickets/:id", async (request, response) => {
 app.post("/tickets", async (request, response) => {
   try {
     let token = request.get("Authentication");
-    let verifiedToken = await jwt.verify(token, "secretKey");
+    let verifiedToken = await jwt.verify(token, secretKey);
     let addValue = request.body;
     let data = await db.collection("tickets").find({}).toArray();
     let id = data.length + 1;
@@ -187,7 +195,7 @@ app.post("/tickets", async (request, response) => {
 app.put("/tickets/:id", async (request, response) => {
   try {
     let token = request.get("Authentication");
-    let verifiedToken = await jwt.verify(token, "secretKey");
+    let verifiedToken = await jwt.verify(token, secretKey);
     let addValue = request.body;
     addValue["id"] = Number(request.params.id);
     let data = await db
@@ -245,7 +253,7 @@ app.post("/login", async (request, response) => {
   } else {
     bcrypt.compare(pass, data.password, (error, result) => {
       if (result) {
-        let token = jwt.sign({ usuario: data.usuario }, "secretKey", {
+        let token = jwt.sign({ usuario: data.usuario }, secretKey, {
           expiresIn: 600,
         });
         log(user, "login", "");
@@ -266,7 +274,7 @@ app.post("/login", async (request, response) => {
 app.delete("/tickets/:id", async (request, response) => {
   try {
     let token = request.get("Authentication");
-    let verifiedToken = await jwt.verify(token, "secretKey");
+    let verifiedToken = await jwt.verify(token, secretKey);
     let data = await db
       .collection("tickets")
       .deleteOne({ id: Number(request.params.id) });
@@ -276,23 +284,26 @@ app.delete("/tickets/:id", async (request, response) => {
   }
 });
 
-// app.listen(1338, () => {
-//   connectDB();
-//   console.log("Servidor escuchando en puerto 1338");
-// });
+app.listen(1338, () => {
+  connectDB();
+  console.log("Servidor escuchando en puerto 1338");
+});
 
-https
-  .createServer(
-    {
-      cert: fs.readFileSync("backend.cert"),
-      key: fs.readFileSync("backend.key"),
-    },
-    app
-  )
-  .listen(1338, () => {
-    connectDB();
-    console.log("Servidor escuchando en puerto 1338");
-  });
+// https
+//   .createServer(
+//     {
+//       cert: fs.readFileSync("backend.cer"),
+//       key: fs.readFileSync("backend.key"),
+//     },
+//     app
+//   )
+//   .listen(1338, () => {
+//     connectDB();
+//     console.log("Servidor escuchando en puerto 1338");
+//   });
+
+
+
 // const httpsOptions = {
 //   key: fs.readFileSync("../CA/ca-private-key.pem"),
 //   cert: fs.readFileSync("../CA/ca-certificate.pem"),
