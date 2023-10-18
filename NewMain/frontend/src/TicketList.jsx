@@ -1,19 +1,57 @@
-import { Datagrid, List, TextField, Edit, EditButton, SimpleForm, TextInput, Create, SelectInput, DateInput, useRecordContext, useListContext } from 'react-admin';
+import { Datagrid, List, TextField, Edit, EditButton, SimpleForm, TextInput, Create, SelectInput, DateInput, useRecordContext, useListContext, SimpleList, } from 'react-admin';
 import { Box, Grid, Typography } from '@mui/material';
 import { useState, useEffect } from 'react';
 
-
-export const TicketList = () => (
-    <List>
-        <Datagrid rowClick="edit">
-            <TextField source="coordinador" label = "Coordinador" />
-            <TextField source="categoria" label = "Categoría"/>
-            <TextField source="subcategoria" label = "Subcategoría"/>
-            <TextField source="estatus" label = "Estatus"/>
-            <EditButton />
-        </Datagrid>
+export const TicketList = (props) => (
+    <List {...props}>
+      <SimpleList
+        primaryText={(record) => record.aula}
+        secondaryText={(record) => 
+            <div>
+            <div>{record.coordinador}</div>
+            <div>{record.categoria}</div>
+          </div>}
+        tertiaryText={(record) => (
+          <div>
+            <div>Prioridad: {record.prioridad}</div>
+            <div>Estatus: {record.estatus}</div>
+          </div>
+        )}
+        linkType="edit"
+        leftAvatar={(record) => <AvatarField record={record} />}
+      />
     </List>
-);
+  );
+  
+  
+  const AvatarField = ({ record }) => {
+    const imageUrl = "https://writestylesonline.com/wp-content/uploads/2018/11/Three-Statistics-That-Will-Make-You-Rethink-Your-Professional-Profile-Picture.jpg" //record.imagenUrl;
+    return (
+      <div>
+        <img
+          src={imageUrl}
+          alt={record.coordinador}
+          style={{
+            width: 50,
+            height: 50,
+            borderRadius: '50%',
+          }}
+        />
+      </div>
+    );
+  };
+
+// export const TicketList = () => (
+//     <List>
+//         <Datagrid rowClick="edit">
+//             <TextField source="coordinador" label = "Coordinador" />
+//             <TextField source="categoria" label = "Categoría"/>
+//             <TextField source="subcategoria" label = "Subcategoría"/>
+//             <TextField source="estatus" label = "Estatus"/>
+//             <EditButton />
+//         </Datagrid>
+//     </List>
+// );
 
 export const TicketEdit = (props) => {
     const data = useRecordContext()

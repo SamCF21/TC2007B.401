@@ -20,7 +20,6 @@ const App = () => {
   const [showRegistrarse, setShowRegistrarse] = useState(false);
 
   useEffect(() => {
-    // Cargar los permisos y determinar si mostrar "registrarse"
     authProvider.getPermissions().then((permissions) => {
       console.log(permissions);
       if (permissions.includes("coordinador nacional")) {
