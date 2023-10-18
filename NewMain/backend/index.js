@@ -283,6 +283,21 @@ app.delete("/tickets/:id", async (request, response) => {
     response.sendStatus(401);
   }
 });
+app.get("/user/permissions", async (request, response) => {
+  try {
+    let token = request.get("Authorization").replace("Bearer ", "");
+    let verifiedToken = await jwt.verify(token, secretKey);
+    let authData = await db.collection("usuarios").findOne({ usuario: verifiedToken.usuario });
+
+    let permissions = authData.permissions;
+
+    response.json(permissions);
+    console.log(permissions);
+  } catch (error) {
+    response.status(401).json({ error: "No se pueden obtener los permisos" });
+  }
+});
+
 
 app.listen(1338, () => {
   connectDB();
