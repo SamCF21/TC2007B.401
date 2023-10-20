@@ -20,7 +20,7 @@ const Registrarse = () => {
   };
 
   const handleSendData = async () => {
-    const request = await new Request("http://127.0.0.1:1338/registrarse", {
+    const request = await new Request("https://127.0.0.1:1338/registrarse", {
       method: "POST",
       body: JSON.stringify(datos),
       headers: new Headers({ "Content-Type": "application/json" }),

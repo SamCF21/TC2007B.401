@@ -2,7 +2,7 @@ import { AuthProvider } from "react-admin";
 
 const authProvider = {
   login: async ({ username, password }) => {
-    const request = new Request("http://localhost:1338/login", {
+    const request = new Request("https://localhost:1338/login", {
       method: "POST",
       body: JSON.stringify({ username: username, password: password }),
       headers: new Headers({ "Content-Type": "application/json" }),
@@ -55,7 +55,7 @@ const authProvider = {
       return Promise.reject("Error linea 53");
     }
 
-    const response = await fetch("http://localhost:1338/user/permissions", {
+    const response = await fetch("https://localhost:1338/user/permissions", {
       method: "GET",
       headers: {
         Authorization: `Bearer ${token}`,
