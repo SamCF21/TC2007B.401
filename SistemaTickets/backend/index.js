@@ -299,23 +299,23 @@ app.get("/user/permissions", async (request, response) => {
 });
 
 
-app.listen(1338, () => {
-  connectDB();
-  console.log("Servidor escuchando en puerto 1338");
-});
+// app.listen(1338, () => {
+//   connectDB();
+//   console.log("Servidor escuchando en puerto 1338");
+// });
 
-// https
-//   .createServer(
-//     {
-//       cert: fs.readFileSync("backend.cer"),
-//       key: fs.readFileSync("backend.key"),
-//     },
-//     app
-//   )
-//   .listen(1338, () => {
-//     connectDB();
-//     console.log("Servidor escuchando en puerto 1338");
-//   });
+https
+  .createServer(
+    {
+      cert: fs.readFileSync("backend.cer"),
+      key: fs.readFileSync("backend.key"),
+    },
+    app
+  )
+  .listen(1338, () => {
+    connectDB();
+    console.log("Servidor escuchando en puerto 1338");
+  });
 
 
 
